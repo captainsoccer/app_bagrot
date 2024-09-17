@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="min_full_name_length">3</integer>
+    <integer name="max_full_name_length">20</integer>
+
+    <integer name="min_username_length">3</integer>
+    <integer name="max_username_length">20</integer>
+    <bool name="is_username_alphanumeric">true</bool>
+
+    <integer name="min_password_length">6</integer>
+    <integer name="max_password_length">20</integer>
+
+    <integer name="min_email_length">6</integer>
+    <integer name="max_email_length">50</integer>
+
+    <integer name="min_phone_number_length">10</integer>
+    <integer name="max_phone_number_length">10</integer>
+</resources>
