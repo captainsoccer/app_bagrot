@@ -1,10 +1,8 @@
 package com.example.idk_tofes;
 
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Model model = new Model();
+    private Model model;
     private Button registerButton;
     private EditText nameEditText, emailEditText, passwordEditText, phoneEditText, userNameEditText;
     private TextValidator nameValidator, emailValidator, passwordValidator, phoneValidator, userNameValidator;
@@ -22,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        model = new Model(this);
 
         initializeWidgets();
         setValidators();
@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                     userNameEditText.getText().toString()
             );
             model.addUser(newUser);
+
+            Toast.makeText(this, "User created successfully", Toast.LENGTH_SHORT).show();
         } catch (IllegalArgumentException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }

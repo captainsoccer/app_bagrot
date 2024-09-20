@@ -39,7 +39,7 @@ public class TextValidator implements TextWatcher {
             errorTextView.setText("needs to be at most " + maxLength + " characters long");
         } else if (numberOnly && !charSequence.toString().matches("[0-9]+")) {
             errorTextView.setText("Only numbers are allowed");
-        } else if (textOnly && !charSequence.toString().matches("[a-zA-Z]+")) {
+        } else if (textOnly && !charSequence.toString().matches("[a-zA-Z ]+")) {
             errorTextView.setText("Only text is allowed");
         } else if (email && !charSequence.toString().matches("^(.+)@(.+)$")) {
             errorTextView.setText("Invalid email");
