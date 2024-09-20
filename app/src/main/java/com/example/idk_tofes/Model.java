@@ -10,6 +10,7 @@ import java.util.Set;
 public class Model {
     private final String USER_NAME_KEY  = "userName";
     ArrayList<User> users = new ArrayList<>();
+    private ArrayList<Note> notes = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
     public Model(Context context) {
@@ -23,6 +24,10 @@ public class Model {
 
         saveData(user);
 
+    }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
 
     private void loadData(){
