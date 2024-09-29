@@ -1,19 +1,29 @@
 package com.example.idk_tofes;
 
 public class Note {
-    private String id;
+    private int id;
     private String content;
+    private static int idCounter = 0;
 
-    public Note(String id, String content) {
-        this.id = id;
+    public Note(String content) {
+        idCounter++;
+        this.id = idCounter;
         this.content = content;
     }
 
-    public String getId() {
+    public static void setIdCounter(int idCounter) {
+        Note.idCounter = idCounter;
+    }
+
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

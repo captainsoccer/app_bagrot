@@ -8,15 +8,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Model {
-    private final String USER_NAME_KEY  = "userName";
     ArrayList<User> users = new ArrayList<>();
-    private ArrayList<Note> notes = new ArrayList<>();
+    private final ArrayList<Note> notes = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
-    public Model(Context context) {
+    private static Model instance;
+
+    private Model(Context context) {
         sharedPreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
         loadData();
 
+    }
+
+    public static Model getInstance(Context context) {
+        return instance == null ? instance = new Model(context) : instance;
     }
 
     public void addUser(User user) {
@@ -28,6 +33,24 @@ public class Model {
 
     public ArrayList<Note> getNotes() {
         return notes;
+    }
+
+    public void addNotes(Note note) {
+        notes.add(note);
+    }
+
+    public void editNotes(int id, String content) {
+        notes.get(id).setContent(content);
+    }
+
+    public void deleteNotes(int id) {
+        notes.remove(id);
+
+        Note.setIdCounter(Note.getIdCounter() - 1);
+
+        for(int i = id; i < notes.size(); i++) {
+            notes.get(i).setId(i);
+        }
     }
 
     private void loadData(){
