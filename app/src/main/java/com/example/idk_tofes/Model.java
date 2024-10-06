@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Model {
@@ -14,25 +15,40 @@ public class Model {
 
     private static Model instance;
 
+    private Optional<User> currentUser;
+
     private Model(Context context) {
         sharedPreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
         loadData();
 
     }
 
+    public String getDeviceModel() {
+        return android.os.Build.MODEL;
+    }
+
     public static Model getInstance(Context context) {
         return instance == null ? instance = new Model(context) : instance;
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public void login(User user) {
+        currentUser = Optional.of(user);
+    }
 
-        saveData(user);
+    public void logout() {
+        currentUser = Optional.empty();
+    }
 
+    public Optional<User> getCurrentUser() {
+        return currentUser;
     }
 
     public ArrayList<Note> getNotes() {
         return notes;
+    }
+
+    public Note getNoteById(int id) {
+        return notes.get(id);
     }
 
     public void addNotes(Note note) {
@@ -65,8 +81,10 @@ public class Model {
         }
     }
 
-    private  void saveData(User user){
+    private void saveUser(User user){
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        users.add(user);
 
         editor.putInt("length", users.size());
 
